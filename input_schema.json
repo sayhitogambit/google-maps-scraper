@@ -1,0 +1,124 @@
+{
+    "title": "Google Maps Business Scraper Input",
+    "description": "Search and extract business data from Google Maps (Requires residential proxies)",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "search_query": {
+            "title": "Search Query",
+            "type": "string",
+            "description": "What to search for (e.g., 'restaurants', 'coffee shops', 'dentists')",
+            "example": "coffee shops",
+            "prefill": "",
+            "editor": "textfield"
+        },
+        "location": {
+            "title": "Location",
+            "type": "string",
+            "description": "Location to search in (city, address, or coordinates)",
+            "example": "New York, NY",
+            "prefill": "",
+            "editor": "textfield"
+        },
+        "search_radius": {
+            "title": "Search Radius (km)",
+            "type": "number",
+            "description": "Search radius in kilometers from the location",
+            "default": 5,
+            "minimum": 1,
+            "maximum": 50,
+            "editor": "number"
+        },
+        "max_results": {
+            "title": "Maximum Results",
+            "type": "integer",
+            "description": "Maximum number of businesses to scrape (Google Maps limits to ~120 per search)",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 500,
+            "editor": "number"
+        },
+        "include_reviews": {
+            "title": "Include Reviews",
+            "type": "boolean",
+            "description": "Extract customer reviews for each business",
+            "default": false,
+            "editor": "checkbox",
+            "sectionCaption": "Additional Data",
+            "sectionDescription": "Extract extra business information"
+        },
+        "max_reviews_per_place": {
+            "title": "Max Reviews per Place",
+            "type": "integer",
+            "description": "Maximum reviews to extract per business",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100,
+            "editor": "number"
+        },
+        "include_photos": {
+            "title": "Include Photos",
+            "type": "boolean",
+            "description": "Include photo URLs for businesses",
+            "default": false,
+            "editor": "checkbox"
+        },
+        "include_popular_times": {
+            "title": "Include Popular Times",
+            "type": "boolean",
+            "description": "Extract popular times/busy hours data",
+            "default": false,
+            "editor": "checkbox"
+        },
+        "business_status": {
+            "title": "Business Status",
+            "type": "string",
+            "description": "Filter by business operational status",
+            "default": "all",
+            "enum": ["all", "operational", "temporarily_closed", "permanently_closed"],
+            "enumTitles": ["All", "Operational Only", "Temporarily Closed", "Permanently Closed"],
+            "editor": "select",
+            "sectionCaption": "Filters",
+            "sectionDescription": "Filter search results"
+        },
+        "min_rating": {
+            "title": "Minimum Rating",
+            "type": "number",
+            "description": "Only include businesses with at least this rating",
+            "default": 0,
+            "minimum": 0,
+            "maximum": 5,
+            "step": 0.5,
+            "editor": "number"
+        },
+        "price_level": {
+            "title": "Price Level",
+            "type": "string",
+            "description": "Filter by price level",
+            "default": "all",
+            "enum": ["all", "inexpensive", "moderate", "expensive", "very_expensive"],
+            "enumTitles": ["All Price Levels", "$ - Inexpensive", "$$ - Moderate", "$$$ - Expensive", "$$$$ - Very Expensive"],
+            "editor": "select"
+        },
+        "proxy_configuration": {
+            "title": "Proxy Configuration",
+            "type": "object",
+            "description": "REQUIRED: Configure residential proxies for Google Maps",
+            "editor": "proxy",
+            "sectionCaption": "Proxy Settings (Required)",
+            "sectionDescription": "Google Maps requires residential proxies to avoid blocking"
+        },
+        "output_format": {
+            "title": "Output Format",
+            "type": "string",
+            "description": "Format for the output data",
+            "default": "json",
+            "enum": ["json", "csv", "excel"],
+            "enumTitles": ["JSON", "CSV", "Excel"],
+            "editor": "select",
+            "sectionCaption": "Output Settings",
+            "sectionDescription": "Configure output format"
+        }
+    },
+    "required": ["search_query", "location"]
+}

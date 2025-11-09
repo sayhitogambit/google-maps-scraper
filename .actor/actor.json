@@ -1,0 +1,29 @@
+{
+    "actorSpecification": 1,
+    "name": "google-maps-scraper",
+    "title": "Google Maps Business Scraper",
+    "description": "Extract business data from Google Maps including ratings, reviews, contact info, and GPS coordinates. Requires residential proxies.",
+    "version": "0.7.0",
+    "storages": {
+        "dataset": {
+            "actorSpecification": 1,
+            "title": "Google Maps Businesses Dataset",
+            "views": {
+                "businesses": {
+                    "title": "Businesses",
+                    "transformation": {
+                        "fields": ["name", "rating", "reviews_count", "address", "phone", "website", "category", "latitude", "longitude"]
+                    },
+                    "display": {
+                        "component": "table",
+                        "properties": {
+                            "pageSize": 20
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "input": "./input_schema.json",
+    "dockerfile": "./Dockerfile"
+}
